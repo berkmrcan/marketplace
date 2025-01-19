@@ -47,8 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'market',
-    'users'
+    'users',
+    'products',
+    'orders',
+    'reviews',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -86,7 +89,10 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db()
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",  # This stores the SQLite database in the project's base directory
+    }
 }
 
 
