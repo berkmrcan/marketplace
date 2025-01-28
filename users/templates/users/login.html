@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %} 
+<div class="container" style="max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
+    <h1 style="color: #333;">Login</h1>
+    <p style="font-size: 16px; color: #555;">Let's get back to the market!</p>
+    
+    <form method="POST" action="." style="display: flex; flex-direction: column; gap: 15px; text-align: left;">
+        {% csrf_token %}
+
+        <div>
+            <label>Username</label>
+            {{ form.username }}
+        </div>
+        <div>
+            <label>Password</label>
+            {{ form.password }}
+        </div>
+        {% if form.errors or form.non_fields_errors %}
+        <div>
+            {% for field in form %}
+                {{field.errors}}
+            {% endfor %}
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <button type="submit" style="padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">
+            Submit
+        </button>
+    </form>
+</div>
+{% endblock %}

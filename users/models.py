@@ -28,7 +28,7 @@ class CustomUser(AbstractUser):
         verbose_name_plural = "Users"
 
     def __str__(self):
-        return f"{self.username} ({self.role})"
+        return f"{self.username}"
 
 class ShippingAddress(models.Model):
     buyer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="shipping_addresses")
@@ -42,6 +42,9 @@ class ShippingAddress(models.Model):
     country = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    class Meta:
+        verbose_name = "Shipping Address"
+        verbose_name_plural = "Shipping Addresses"
+
     def __str__(self):
         return f"{self.full_name} - {self.address_line_1}, {self.city}, {self.country}"
