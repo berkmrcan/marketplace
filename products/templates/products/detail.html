@@ -12,6 +12,10 @@
         <p style="font-size: 20px; font-weight: bold; color: #007bff;">${{ product.price }}</p>
         <p style="font-size: 16px; color: #555;">Sold by: <strong>{{ product.seller }}</strong></p>
         <p style="font-size: 14px; color: #666;">{{ product.description }}</p>
+        {% if request.user == product.seller %}
+        <a href = "{% url 'products:delete' product.id %}"> Delete</a>
+        <a href = "{% url 'products:edit' product.id %}"> Edit</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

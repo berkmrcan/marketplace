@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'orders',
     'reviews',
     'chat',
+    'dashboard',
     'main'
 ]
 
