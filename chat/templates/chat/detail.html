@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Conversation {% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="text-align: center; font-size: 2rem; color: #333; margin-bottom: 20px;">
+        Conversation
+    </h1>
+
+    <div style="max-height: 400px; overflow-y: auto; padding: 10px; background: white; border-radius: 8px; border: 1px solid #ddd;">
+        {% for message in conversation.messages.all %}
+            {% if message.created_by == request.user %}
+                <div style="margin-bottom: 15px; padding: 10px; border-radius: 8px; background: brown; color: white;">
+            {% else %}
+                <div style="margin-bottom: 15px; padding: 10px; border-radius: 8px; background: #e9ecef; color: black;">
+            {% endif %}
+                    <p style="margin: 0; font-weight: bold;">{{ message.created_by.username }}</p>
+                    <p style="margin: 5px 0; font-size: 0.9rem; opacity: 0.7;">{{ message.created_at }}</p>
+                    <p style="margin: 5px 0; font-size: 1rem;">{{ message.content }}</p>
+                </div>
+        {% empty %}
+            <p style="text-align: center; color: #888;">No messages yet.</p>
+        {% endfor %}
+    </div>
+
+    <form method="POST" action="." style="margin-top: 20px;">
+        {% csrf_token %}
+        <div style="margin-bottom: 10px;">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" style="width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s;">
+            Send
+        </button>
+    </form>
+</div>
+{% endblock %}

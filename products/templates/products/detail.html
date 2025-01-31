@@ -15,7 +15,10 @@
         {% if request.user == product.seller %}
         <a href = "{% url 'products:delete' product.id %}"> Delete</a>
         <a href = "{% url 'products:edit' product.id %}"> Edit</a>
+        {% else %}
+        <a href="{% url 'chat:new' product.id %}">Contact Seller</a>
         {% endif %}
+
     </div>
 </div>
 {% endblock %}

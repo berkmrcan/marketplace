@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Inbox {% endblock %}
+
+{% block content %}
+<h1 style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 20px;">
+    Conversations
+</h1>
+{% for conversation in conversations %}
+<img src="{{ conversation.product.image.url }}" width="400" style="border-radius: 15px; box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease, filter 0.3s ease; margin-bottom: 15px;">
+<div>
+    <a href="{% url 'chat:detail' conversation.id %}" style="text-decoration: none; color: #007bff; font-size: 1rem; font-weight: bold;"> Go to conversation</a>
+</div>
+<div style="margin-top: 10px;">
+    {% for member in conversation.members.all %}
+    {% if member != request.user %}
+    <p style="font-size: 1rem; color: #555; margin: 5px 0;">{{ member.username }}</p>    
+    <p style="font-size: 1rem; font-weight: bold; color: #333; margin: 5px 0;">{{ conversation.product.name }}</p>
+    <p style="font-size: 0.9rem; color: #777; margin: 5px 0;">{{ conversation.modified_at }}</p>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}
